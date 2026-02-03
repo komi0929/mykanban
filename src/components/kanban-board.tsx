@@ -13,7 +13,7 @@ type KanbanBoardProps = {
 const COLUMNS = [
   { id: 'ideation', label: '妄想中', color: 'text-amber-500', icon: '/assets/3d/ideation.png' },
   { id: 'development', label: '開発中', color: 'text-purple-600', icon: '/assets/3d/development.png' },
-  { id: 'live', label: '公開中', color: 'text-sky-600', icon: '/assets/3d/live.png' },
+  { id: 'live', label: '公開中', color: 'text-rose-500', icon: '/assets/3d/live.png' },
   { id: 'done', label: '一旦保留', color: 'text-emerald-600', icon: '/assets/3d/pending.png' },
 ] as const
 
