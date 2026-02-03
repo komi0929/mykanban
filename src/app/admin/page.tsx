@@ -43,74 +43,78 @@ export default async function AdminPage() {
           </div>
         </header>
 
-        <Card className="rounded-[32px] border-none shadow-sm">
-           <CardHeader className="flex flex-row items-center justify-between px-8 py-6">
-              <CardTitle>Projects</CardTitle>
+        <Card className="rounded-[32px] border-none shadow-sm bg-transparent">
+           <CardHeader className="flex flex-row items-center justify-between px-0 py-6">
+              <CardTitle className="text-2xl font-bold text-slate-800">Projects</CardTitle>
               <ProjectForm />
            </CardHeader>
            <CardContent className="px-0 pb-0">
-              <Table>
-                <TableHeader>
-                  <TableRow className="hover:bg-transparent px-8">
-                    <TableHead className="w-[100px] pl-8">Image</TableHead>
-                    <TableHead>Title</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead className="hidden md:table-cell">URL</TableHead>
-                    <TableHead className="text-right pr-8">Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {projects?.map((project) => (
-                    <TableRow key={project.id} className="hover:bg-slate-50/50">
-                      <TableCell className="font-medium pl-8">
-                        <div className="relative h-12 w-16 overflow-hidden rounded-lg bg-slate-100">
-                          {project.image_url && (
-                             <Image src={project.image_url} alt={project.title} fill className="object-cover" />
+                    <div key={project.id} className="group relative bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-300 rounded-[24px] p-4 shadow-sm hover:shadow-xl hover:-translate-y-1 border border-slate-100/50">
+                        {/* Image / Cover */}
+                        <div className="relative aspect-video w-full overflow-hidden rounded-[16px] bg-slate-100 mb-4">
+                          {project.image_url ? (
+                             <Image src={project.image_url} alt={project.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                          ) : (
+                             <div className="flex h-full w-full items-center justify-center text-slate-300">
+                                <span className="text-4xl">📦</span>
+                             </div>
                           )}
+                          {/* Floating Status Badge */}
+                          <div className="absolute top-3 left-3">
+                             <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold shadow-sm backdrop-blur-md border border-white/20
+                               ${project.status === 'ideation' ? 'bg-pink-100/90 text-pink-600' : ''}
+                               ${project.status === 'development' ? 'bg-purple-100/90 text-purple-600' : ''}
+                               ${project.status === 'live' ? 'bg-sky-100/90 text-sky-600' : ''}
+                               ${project.status === 'done' ? 'bg-emerald-100/90 text-emerald-600' : ''}
+                             `}>
+                               {project.status}
+                             </span>
+                          </div>
                         </div>
-                      </TableCell>
-                      <TableCell className="font-bold text-slate-700">{project.title}</TableCell>
-                      <TableCell>
-                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                           ${project.status === 'ideation' ? 'bg-pink-100 text-pink-800' : ''}
-                           ${project.status === 'development' ? 'bg-purple-100 text-purple-800' : ''}
-                           ${project.status === 'live' ? 'bg-sky-100 text-sky-800' : ''}
-                           ${project.status === 'done' ? 'bg-emerald-100 text-emerald-800' : ''}
-                         `}>
-                           {project.status}
-                         </span>
-                      </TableCell>
-                      <TableCell className="hidden md:table-cell text-muted-foreground truncate max-w-[200px]">
-                         {project.site_url ? (
-                            <a href={project.site_url} target="_blank" rel="noreferrer" className="flex items-center gap-1 hover:underline">
-                               {project.site_url} <ExternalLink className="h-3 w-3" />
-                            </a>
-                         ) : '-'}
-                      </TableCell>
-                      <TableCell className="text-right pr-8">
-                         <div className="flex items-center justify-end gap-2">
-                             <ProjectForm project={project} />
-                             <form action={async () => {
-                                'use server'
-                                await deleteProject(project.id)
-                             }}>
-                                <Button size="icon" variant="ghost" className="text-red-400 hover:text-red-600 hover:bg-red-50 rounded-full">
-                                   <Trash2 className="h-4 w-4" />
-                                </Button>
-                             </form>
-                         </div>
-                      </TableCell>
-                    </TableRow>
+
+                        {/* Content */}
+                        <div className="space-y-3">
+                           <div className="flex items-start justify-between">
+                              <h3 className="font-bold text-lg text-slate-700 line-clamp-1">{project.title}</h3>
+                           </div>
+                           
+                           {/* Actions Footer */}
+                           <div className="flex items-center justify-between pt-2 border-t border-slate-50 mt-4">
+                               <div className="flex gap-2">
+                                  {project.site_url && (
+                                     <a href={project.site_url} target="_blank" rel="noreferrer" className="p-2 rounded-full bg-slate-50 text-slate-400 hover:bg-sky-50 hover:text-sky-500 transition-colors">
+                                        <ExternalLink className="h-4 w-4" />
+                                     </a>
+                                  )}
+                               </div>
+                               <div className="flex items-center gap-1">
+                                    <ProjectForm project={project} />
+                                    <form action={async () => {
+                                       'use server'
+                                       await deleteProject(project.id)
+                                    }}>
+                                       <Button size="icon" variant="ghost" className="h-9 w-9 text-red-300 hover:text-red-500 hover:bg-red-50 rounded-full">
+                                          <Trash2 className="h-4 w-4" />
+                                       </Button>
+                                    </form>
+                               </div>
+                           </div>
+                        </div>
+                    </div>
                   ))}
+                  
+                  {/* Empty State / Add New Placeholder */}
                   {(!projects || projects.length === 0) && (
-                     <TableRow>
-                        <TableCell colSpan={5} className="h-24 text-center text-muted-foreground">
-                            No projects found. Create one to get started.
-                        </TableCell>
-                     </TableRow>
+                     <div className="col-span-full flex flex-col items-center justify-center py-20 bg-white/50 rounded-[32px] border-2 border-dashed border-slate-200">
+                        <div className="text-6xl mb-4">✨</div>
+                        <h3 className="text-xl font-bold text-slate-400">No projects yet</h3>
+                        <p className="text-slate-400 mb-6">Create your first bento box!</p>
+                        <ProjectForm />
+                     </div>
                   )}
-                </TableBody>
-              </Table>
+              </div>
            </CardContent>
         </Card>
       </div>

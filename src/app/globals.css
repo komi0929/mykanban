@@ -2,38 +2,38 @@
 @plugin "tailwindcss-animate";
 
 :root {
-  /* Pastel Blue background */
-  --background: #f0f5fa;
-  --foreground: #334155; /* Slate 700 */
+  /* Nani-style Pastel Background */
+  --background: #F8FAFC; /* Slate 50 */
+  --foreground: #334155; /* Slate 700 - Softer than black */
 
-  /* White cards */
-  --card: #ffffff;
+  /* White Cards with Transparency */
+  --card: #FFFFFF;
   --card-foreground: #334155;
 
-  --popover: #ffffff;
+  --popover: #FFFFFF;
   --popover-foreground: #334155;
 
-  /* Buttons: Black */
-  --primary: #000000;
-  --primary-foreground: #ffffff;
+  /* Primary Button - Nani Blue */
+  --primary: #0EA5E9; /* Sky 500 */
+  --primary-foreground: #FFFFFF;
 
-  --secondary: #e2e8f0;
-  --secondary-foreground: #1e293b;
+  --secondary: #E0F2FE; /* Sky 100 */
+  --secondary-foreground: #0284C7; /* Sky 600 */
 
-  --muted: #f1f5f9;
+  --muted: #F1F5F9; /* Slate 100 */
   --muted-foreground: #64748b;
 
-  --accent: #0ea5e9; /* Sky Blue */
-  --accent-foreground: #ffffff;
+  --accent: #E0F2FE; /* Soft Blue overlay */
+  --accent-foreground: #0284C7;
 
-  --destructive: #ef4444;
-  --destructive-foreground: #f8fafc;
+  --destructive: #FEE2E2; /* Red 100 */
+  --destructive-foreground: #DC2626; /* Red 600 */
 
-  --border: #e2e8f0;
-  --input: #e2e8f0;
-  --ring: #0ea5e9;
+  --border: #E2E8F0; /* Slate 200 */
+  --input: #F1F5F9; /* Slate 100 - Filled inputs style */
+  --ring: #38BDF8; /* Sky 400 */
 
-  --radius: 1.5rem; /* 24px */
+  --radius: 1.75rem; /* 28px - Very rounded */
 }
 
 @theme inline {
@@ -66,5 +66,7 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  /* Nani-style Dot Pattern */
+  background-image: radial-gradient(#CBD5E1 1px, transparent 1px);
+  background-size: 24px 24px;
 }

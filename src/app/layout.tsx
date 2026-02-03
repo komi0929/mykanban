@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
-import { Noto_Sans_JP } from 'next/font/google'
+import { M_PLUS_Rounded_1c } from 'next/font/google'
 import './globals.css'
 import { cn } from '@/lib/utils'
 import { Toaster } from "@/components/ui/toaster"
 
-const notoSansJP = Noto_Sans_JP({
+const mPlusRounded = M_PLUS_Rounded_1c({
   subsets: ['latin'],
-  variable: '--font-noto-sans-jp',
-  weight: ['400', '700'], // Bold for headers
+  variable: '--font-m-plus-rounded',
+  weight: ['400', '500', '700', '800'],
 })
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={cn(notoSansJP.variable, "antialiased min-h-screen bg-background")}>
+      <body className={cn(mPlusRounded.className, "antialiased min-h-screen bg-background text-foreground tracking-tight")}>
         {children}
         <Toaster />
       </body>

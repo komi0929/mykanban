@@ -23,21 +23,21 @@ export function KanbanBoard({ projects }: KanbanBoardProps) {
         const colProjects = projects.filter(p => p.status === col.id)
         
         return (
-          <div key={col.id} className="flex flex-col gap-6">
-            <div className="flex items-center justify-between pl-2 pr-4">
-                <div className={`inline-flex items-center justify-center rounded-full px-4 py-1.5 text-sm font-bold ring-1 ring-inset ${col.color}`}>
+          <div key={col.id} className="flex flex-col gap-4 p-4 rounded-[32px] bg-white/40 backdrop-blur-sm border border-white/20 shadow-sm transition-colors hover:bg-white/60">
+            <div className="flex items-center justify-between pl-2 pr-2 mb-2">
+                <div className={`inline-flex items-center justify-center rounded-full px-4 py-1.5 text-sm font-bold ring-2 ring-inset transition-shadow ${col.color} shadow-sm`}>
                   {col.label}
                 </div>
-               <span className="text-slate-400 text-sm font-bold">{colProjects.length}</span>
+               <span className="flex items-center justify-center h-6 w-6 rounded-full bg-white text-slate-400 text-xs font-bold shadow-sm">{colProjects.length}</span>
             </div>
             
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-4 min-h-[150px]">
               {colProjects.map(project => (
                 <ProjectCard key={project.id} project={project} />
               ))}
               {colProjects.length === 0 && (
-                 <div className="rounded-3xl border-2 border-dashed border-slate-200 p-8 text-center">
-                    <p className="text-slate-400 text-sm font-medium">No projects</p>
+                 <div className="flex flex-col items-center justify-center h-full min-h-[150px] rounded-[24px] border-2 border-dashed border-slate-200/60 bg-slate-50/30 text-center group">
+                    <p className="text-slate-300 text-sm font-bold group-hover:text-slate-400 transition-colors">Empty</p>
                  </div>
               )}
             </div>

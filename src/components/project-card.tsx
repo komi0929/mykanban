@@ -22,7 +22,7 @@ export function ProjectCard({ project }: { project: Project }) {
       <DialogTrigger asChild>
         <div className="group cursor-pointer rounded-3xl bg-white p-4 shadow-sm hover:shadow-soft transition-all duration-300 hover:-translate-y-1 w-full">
           {/* Card Visual / Image */}
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-slate-100">
+          <div className="relative aspect-4/3 w-full overflow-hidden rounded-[20px] bg-slate-100 shadow-inner">
              {project.image_url ? (
                 <Image 
                   src={project.image_url} 
