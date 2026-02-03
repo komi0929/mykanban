@@ -11,10 +11,10 @@ type KanbanBoardProps = {
 }
 
 const COLUMNS = [
-  { id: 'ideation', label: '妄想中', color: 'bg-pink-100 text-pink-700 ring-pink-200', icon: '/assets/3d/ideation.png' },
-  { id: 'development', label: '開発中', color: 'bg-purple-100 text-purple-700 ring-purple-200', icon: '/assets/3d/development.png' },
-  { id: 'live', label: '公開中', color: 'bg-sky-100 text-sky-700 ring-sky-200', icon: '/assets/3d/live.png' },
-  { id: 'done', label: '一旦完了', color: 'bg-emerald-100 text-emerald-700 ring-emerald-200', icon: '/assets/3d/done.png' },
+  { id: 'ideation', label: '妄想中', color: 'text-amber-500', icon: '/assets/3d/ideation.png' },
+  { id: 'development', label: '開発中', color: 'text-purple-600', icon: '/assets/3d/development.png' },
+  { id: 'live', label: '公開中', color: 'text-sky-600', icon: '/assets/3d/live.png' },
+  { id: 'done', label: '一旦保留', color: 'text-emerald-600', icon: '/assets/3d/pending.png' },
 ] as const
 
 export function KanbanBoard({ projects }: KanbanBoardProps) {
@@ -35,11 +35,10 @@ export function KanbanBoard({ projects }: KanbanBoardProps) {
                         className="object-contain mix-blend-multiply p-2" 
                      />
                  </div>
-                 <div className="flex items-center gap-3 -mt-4 z-10">
-                     <div className={`inline-flex items-center justify-center rounded-full px-5 py-2 text-base font-black ring-2 ring-inset tracking-wide shadow-sm bg-white ${col.color.replace('bg-', 'text-').replace('ring-', 'border-')}`}>
+                 <div className="flex items-center justify-center -mt-4 z-10">
+                     <div className={`text-xl font-black tracking-widest ${col.color}`}>
                         {col.label}
                      </div>
-                     <span className="flex items-center justify-center h-7 w-7 rounded-full bg-white text-slate-400 text-xs font-bold shadow-sm ring-1 ring-slate-100">{colProjects.length}</span>
                  </div>
             </div>
             
