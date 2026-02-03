@@ -10,7 +10,7 @@ import { useState, useRef } from "react"
 import { createProject, updateProject } from "@/app/admin/project-actions"
 import { useToast } from "@/components/ui/use-toast"
 import { Database } from "@/lib/database.types"
-import { Loader2, Plus, Upload, X } from "lucide-react"
+import { Loader2, Plus, Upload } from "lucide-react"
 import { createClient } from "@/lib/supabase/client" // for storage upload
 import Image from "next/image"
 
@@ -45,10 +45,10 @@ export function ProjectForm({ project }: { project?: Project }) {
 
        const { data } = supabase.storage.from('project-images').getPublicUrl(filePath)
        setImageUrl(data.publicUrl)
-     } catch (error: any) {
+     } catch (error) {
         toast({
            title: "Upload Error",
-           description: error.message,
+           description: error instanceof Error ? error.message : "An unknown error occurred",
            variant: "destructive"
         })
      } finally {

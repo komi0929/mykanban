@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import { Database } from '@/lib/database.types'
 import { redirect } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -20,10 +21,12 @@ export default async function AdminPage() {
     redirect('/admin/login')
   }
 
-  const { data: projects } = await supabase
+  const { data: projectsData } = await supabase
     .from('projects')
     .select('*')
     .order('created_at', { ascending: false })
+  
+  const projects = projectsData as Database['public']['Tables']['projects']['Row'][] | null
 
   return (
     <div className="min-h-screen bg-slate-50 p-4 sm:p-8">
@@ -31,7 +34,10 @@ export default async function AdminPage() {
         <header className="flex items-center justify-between">
           <h1 className="text-3xl font-bold tracking-tight text-slate-900">Admin Dashboard</h1>
           <div className="flex items-center gap-4">
-             <form action={logout}>
+             <form action={async () => {
+                'use server'
+                await logout()
+             }}>
                 <Button variant="ghost" className="text-slate-500 hover:text-slate-900">Log out</Button>
              </form>
           </div>

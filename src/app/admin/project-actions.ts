@@ -26,7 +26,8 @@ export async function createProject(formData: FormData) {
     image_url: formData.get('image_url') as string | null, 
   }
 
-  const { error } = await supabase.from('projects').insert(project)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { error } = await (supabase.from('projects') as any).insert(project)
 
   if (error) {
     return { error: error.message }
@@ -52,7 +53,8 @@ export async function updateProject(formData: FormData) {
     image_url: formData.get('image_url') as string,
   }
 
-  const { error } = await supabase.from('projects').update(project).eq('id', id)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { error } = await (supabase.from('projects') as any).update(project).eq('id', id)
 
   if (error) {
     return { error: error.message }
