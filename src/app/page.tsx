@@ -17,10 +17,7 @@ export default async function Home() {
           <h1 className="text-5xl font-black text-slate-900 tracking-tight sm:text-7xl drop-shadow-sm">
             My Kanban
           </h1>
-          <p className="max-w-2xl text-xl text-slate-500 font-medium leading-relaxed">
-            ここには私の妄想から実現までの全てがあります。<br className="hidden sm:inline" />
-            カンバンボードで進捗を可視化したポートフォリオです。
-          </p>
+
         </header>
         
         <KanbanBoard projects={projects || []} />
