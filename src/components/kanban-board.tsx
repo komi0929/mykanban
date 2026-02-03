@@ -26,11 +26,16 @@ export function KanbanBoard({ projects }: KanbanBoardProps) {
         return (
           <div key={col.id} className="flex flex-col gap-4 p-4 rounded-[32px] bg-white/40 backdrop-blur-sm border border-white/20 shadow-sm transition-colors hover:bg-white/60">
             {/* Header with 3D Icon */}
-            <div className="flex flex-col items-center justify-center -mt-8 mb-4">
-                 <div className="relative w-24 h-24 drop-shadow-xl transition-transform hover:scale-110 duration-300">
-                     <Image src={col.icon} alt={col.label} fill className="object-contain" />
+            <div className="flex flex-col items-center justify-center mb-6 pt-4">
+                 <div className="relative w-32 h-32 transition-transform hover:scale-105 duration-500">
+                     <Image 
+                        src={col.icon} 
+                        alt={col.label} 
+                        fill 
+                        className="object-contain mix-blend-multiply p-2" 
+                     />
                  </div>
-                 <div className="flex items-center gap-2 mt-2">
+                 <div className="flex items-center gap-3 -mt-4 z-10">
                      <div className={`inline-flex items-center justify-center rounded-full px-5 py-2 text-base font-black ring-2 ring-inset tracking-wide shadow-sm bg-white ${col.color.replace('bg-', 'text-').replace('ring-', 'border-')}`}>
                         {col.label}
                      </div>
