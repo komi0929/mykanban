@@ -28,11 +28,11 @@ export default async function Home() {
               className="object-contain h-16 w-auto sm:h-24 mb-4" 
               priority
           />
-          <div className="text-slate-600 font-medium leading-relaxed max-w-xl mx-auto text-sm sm:text-base">
-            <p>
-              福岡の小さなお菓子屋さんが、「あったらいいな」を形にする個人開発サイト。<br className="hidden sm:inline" />
-              アイデアを共有して、みんなでワクワクできる場所を目指しています。<br className="hidden sm:inline" />
-              アイデア募集中！
+          <div className="text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto text-sm sm:text-base">
+            <p className="inline-block text-left sm:text-center">
+              福岡の小さなスイーツ店の店主、komiが早起きしてつくったアプリ達です。<br />
+              皆さんの毎日がちょっとだけ楽しく・便利になると嬉しいです。<br />
+              こんなの欲しい！というアイデアは
               <a 
                 href="https://humuhumu.hitokoto.tech/" 
                 target="_blank" 
@@ -41,7 +41,7 @@ export default async function Home() {
               >
                 「ふむふむ君」
               </a>
-              にもぜひ教えてくださいね。
+              に聞かせてください！
             </p>
           </div>
         </header>
