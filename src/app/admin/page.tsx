@@ -23,7 +23,7 @@ export default async function AdminPage() {
   const { data: projectsData } = await supabase
     .from('projects')
     .select('*')
-    .order('sort_order', { ascending: true })
+    // .order('sort_order', { ascending: true }) // Disabled due to missing DB column
     .order('created_at', { ascending: false })
   
   const projects = projectsData as Database['public']['Tables']['projects']['Row'][] | null
