@@ -8,7 +8,7 @@ export function SiteFooter() {
           <Link href="/about" className="hover:text-sky-500 transition-colors">
             自己紹介
           </Link>
-          <Link href="#" className="hover:text-pink-500 transition-colors">
+          <Link href="/omamori" className="hover:text-pink-500 transition-colors">
             お守りに
           </Link>
         </div>

@@ -31,7 +31,7 @@ export function SiteHeader() {
             <Link href="/about" className="text-sm font-bold text-slate-600 hover:text-sky-500 transition-colors">
                 自己紹介
             </Link>
-            <Link href="#" className="text-sm font-bold text-slate-600 hover:text-pink-500 transition-colors">
+            <Link href="/omamori" className="text-sm font-bold text-slate-600 hover:text-pink-500 transition-colors">
                 お守りに
             </Link>
         </nav>
@@ -55,7 +55,7 @@ export function SiteHeader() {
                 自己紹介
             </Link>
             <Link 
-                href="#" 
+                href="/omamori" 
                 className="p-4 rounded-xl bg-slate-50 text-center font-bold text-slate-700 hover:bg-pink-50 hover:text-pink-600 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
             >
