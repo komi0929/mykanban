@@ -28,7 +28,7 @@ export function SiteHeader() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
-            <Link href="#" className="text-sm font-bold text-slate-600 hover:text-sky-500 transition-colors">
+            <Link href="/about" className="text-sm font-bold text-slate-600 hover:text-sky-500 transition-colors">
                 自己紹介
             </Link>
             <Link href="#" className="text-sm font-bold text-slate-600 hover:text-pink-500 transition-colors">
@@ -48,7 +48,7 @@ export function SiteHeader() {
       {isMenuOpen && (
         <div className="md:hidden absolute top-16 left-0 right-0 bg-white border-b border-slate-100 shadow-xl p-4 flex flex-col gap-4 animate-in slide-in-from-top-2 duration-200">
             <Link 
-                href="#" 
+                href="/about" 
                 className="p-4 rounded-xl bg-slate-50 text-center font-bold text-slate-700 hover:bg-sky-50 hover:text-sky-600 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
             >
