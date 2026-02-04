@@ -13,13 +13,16 @@ export function SiteHeader() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1600px] h-16 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-2">
-            <div className="relative w-8 h-8">
-                <Image src="/logo.png" alt="logo" fill className="object-contain" />
-            </div>
-            <h1 className="text-xl font-bold tracking-tight text-slate-900 font-(--font-fredoka)">
-                mykanban
-            </h1>
+        <div className="flex items-center">
+            <Link href="/" className="relative h-10 w-48 hover:opacity-80 transition-opacity">
+                <Image 
+                    src="/logo_brand.png" 
+                    alt="mykanban" 
+                    fill 
+                    className="object-contain object-left" 
+                    priority
+                />
+            </Link>
         </div>
 
         {/* Desktop Navigation */}
