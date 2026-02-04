@@ -20,7 +20,7 @@ export function SiteHeader() {
                     alt="mykanban" 
                     width={160}
                     height={40}
-                    className="object-contain h-10 w-auto" 
+                    className="object-contain h-9 w-auto" 
                     priority
                 />
             </Link>
