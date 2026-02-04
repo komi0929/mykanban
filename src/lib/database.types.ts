@@ -18,6 +18,7 @@ export interface Database {
           memo: string | null
           image_url: string | null
           site_url: string | null
+          sort_order: number | null
           created_at: string
           updated_at: string
         }
@@ -29,6 +30,7 @@ export interface Database {
           memo?: string | null
           image_url?: string | null
           site_url?: string | null
+          sort_order?: number | null
           created_at?: string
           updated_at?: string
         }
@@ -40,6 +42,7 @@ export interface Database {
           memo?: string | null
           image_url?: string | null
           site_url?: string | null
+          sort_order?: number | null
           created_at?: string
           updated_at?: string
         }

@@ -26,14 +26,13 @@ export function ProjectForm({ project }: { project?: Project }) {
   
   const isEdit = !!project
 
-  async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
-     const file = e.target.files?.[0]
+  async function handleImageUpload(file: File) {
      if (!file) return
 
      setUploading(true)
      try {
        const supabase = createClient()
-       const fileExt = file.name.split('.').pop()
+       const fileExt = file.name.split('.').pop() || 'png'
        const fileName = `${Math.random()}.${fileExt}`
        const filePath = `${fileName}`
 
@@ -45,15 +44,32 @@ export function ProjectForm({ project }: { project?: Project }) {
 
        const { data } = supabase.storage.from('project-images').getPublicUrl(filePath)
        setImageUrl(data.publicUrl)
+       toast({ title: "画像アップロード", description: "画像のアップロードに成功しました" })
      } catch (error) {
         toast({
-           title: "Upload Error",
-           description: error instanceof Error ? error.message : "An unknown error occurred",
+           title: "アップロードエラー",
+           description: error instanceof Error ? error.message : "予期せぬエラーが発生しました",
            variant: "destructive"
         })
      } finally {
         setUploading(false)
      }
+  }
+
+  const onFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (e.target.files?.[0]) handleImageUpload(e.target.files[0])
+  }
+
+  const handlePaste = (e: React.ClipboardEvent) => {
+      const items = e.clipboardData.items
+      for (const item of items) {
+          if (item.type.startsWith('image/')) {
+              const file = item.getAsFile()
+              if (file) handleImageUpload(file)
+              e.preventDefault()
+              return
+          }
+      }
   }
 
   async function handleSubmit(formData: FormData) {
@@ -63,19 +79,20 @@ export function ProjectForm({ project }: { project?: Project }) {
         formData.append('id', project.id)
         const res = await updateProject(formData)
         if (res?.error) {
-           toast({ title: "Error", description: res.error, variant: "destructive" })
+           toast({ title: "エラー", description: res.error, variant: "destructive" })
         } else {
-           toast({ title: "Updated", description: "Project updated successfully" })
+           toast({ title: "更新完了", description: "プロジェクトを更新しました" })
            setOpen(false)
         }
     } else {
         const res = await createProject(formData)
         if (res?.error) {
-           toast({ title: "Error", description: res.error, variant: "destructive" })
+           toast({ title: "エラー", description: res.error, variant: "destructive" })
         } else {
-           toast({ title: "Created", description: "Project created successfully" })
+           toast({ title: "作成完了", description: "新しいプロジェクトを作成しました" })
            setOpen(false)
-           // Reset form implicitly by closing or could add reset logic here
+           setImageUrl("")
+           // Reset form implicitly by closing
         }
     }
     setLoading(false)
@@ -85,19 +102,19 @@ export function ProjectForm({ project }: { project?: Project }) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         {isEdit ? (
-           <Button variant="outline" size="sm" className="rounded-full">Edit</Button>
+           <Button variant="outline" size="sm" className="rounded-full">編集</Button>
         ) : (
            <Button className="rounded-full shadow-lg gap-2" size="lg">
              <Plus className="h-5 w-5" />
-             Create New Project
+             新規プロジェクト作成
            </Button>
         )}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] md:max-w-2xl bg-white rounded-3xl">
+      <DialogContent className="sm:max-w-[425px] md:max-w-2xl bg-white rounded-3xl" onPaste={handlePaste}>
         <DialogHeader>
-          <DialogTitle>{isEdit ? "Edit Project" : "Create New Project"}</DialogTitle>
+          <DialogTitle>{isEdit ? "プロジェクト編集" : "新規プロジェクト作成"}</DialogTitle>
           <DialogDescription>
-            {isEdit ? "Update project details below." : "Add a new project to your Kanban board."}
+            {isEdit ? "以下の内容を編集してください。" : "カンバンに新しいプロジェクトを追加します。"}
           </DialogDescription>
         </DialogHeader>
         <form action={handleSubmit} className="grid gap-6 py-4">
@@ -105,7 +122,7 @@ export function ProjectForm({ project }: { project?: Project }) {
               {/* Left Column: Image & Status */}
               <div className="space-y-4">
                   <div className="flex flex-col gap-2">
-                    <Label>Cover Image</Label>
+                    <Label>カバー画像 (Ctrl+Vで貼付可)</Label>
                     <div 
                       className="relative aspect-video w-full overflow-hidden rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50 hover:bg-slate-100 transition-colors cursor-pointer flex items-center justify-center group"
                       onClick={() => fileInputRef.current?.click()}
@@ -114,13 +131,13 @@ export function ProjectForm({ project }: { project?: Project }) {
                           <>
                             <Image src={imageUrl} alt="Cover" fill className="object-cover" />
                              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-medium">
-                                Change Image
+                                画像を変更
                              </div>
                           </>
                        ) : (
                           <div className="flex flex-col items-center gap-2 text-slate-400">
                              {uploading ? <Loader2 className="h-8 w-8 animate-spin" /> : <Upload className="h-8 w-8" />}
-                             <span className="text-xs">{uploading ? "Uploading..." : "Click to upload"}</span>
+                             <span className="text-xs">{uploading ? "アップロード中..." : "クリック または ペースト"}</span>
                           </div>
                        )}
                        <input 
@@ -128,51 +145,56 @@ export function ProjectForm({ project }: { project?: Project }) {
                          ref={fileInputRef} 
                          className="hidden" 
                          accept="image/*" 
-                         onChange={handleImageUpload}
+                         onChange={onFileInputChange}
                          disabled={uploading}
                        />
                     </div>
                   </div>
 
                   <div className="grid gap-2">
-                    <Label htmlFor="status">Status</Label>
+                    <Label htmlFor="status">ステータス</Label>
                     <Select name="status" defaultValue={project?.status || "ideation"}>
                       <SelectTrigger className="w-full rounded-xl bg-slate-50 border-0 h-12">
-                        <SelectValue placeholder="Select a status" />
+                        <SelectValue placeholder="ステータスを選択" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          <SelectLabel>Status</SelectLabel>
+                          <SelectLabel>ステータス</SelectLabel>
                           <SelectItem value="ideation">妄想中 (Ideation)</SelectItem>
                           <SelectItem value="development">開発中 (Development)</SelectItem>
                           <SelectItem value="live">公開中 (Live)</SelectItem>
-                          <SelectItem value="done">一旦完了 (Done)</SelectItem>
+                          <SelectItem value="done">一旦保留 (On Hold)</SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>
+                  </div>
+
+                  <div className="grid gap-2">
+                    <Label htmlFor="sort_order">並び順 (数字)</Label>
+                    <Input id="sort_order" name="sort_order" type="number" defaultValue={project?.sort_order || 0} className="rounded-xl bg-slate-50 border-0 h-12" />
                   </div>
               </div>
 
               {/* Right Column: Text Fields */}
               <div className="space-y-4">
                   <div className="grid gap-2">
-                    <Label htmlFor="title">Project Name</Label>
-                    <Input id="title" name="title" defaultValue={project?.title} className="rounded-xl bg-slate-50 border-0 h-12" required />
+                    <Label htmlFor="title">プロジェクト名</Label>
+                    <Input id="title" name="title" defaultValue={project?.title} className="rounded-xl bg-slate-50 border-0 h-12" required placeholder="例: すごいアプリ" />
                   </div>
                   
                   <div className="grid gap-2">
-                    <Label htmlFor="summary">Summary</Label>
-                    <Textarea id="summary" name="summary" defaultValue={project?.summary || ""} className="rounded-xl bg-slate-50 border-0 min-h-[100px]" />
+                    <Label htmlFor="summary">概要</Label>
+                    <Textarea id="summary" name="summary" defaultValue={project?.summary || ""} className="rounded-xl bg-slate-50 border-0 min-h-[100px]" placeholder="プロジェクトの簡単な説明..." />
                   </div>
 
                   <div className="grid gap-2">
-                    <Label htmlFor="site_url">Site URL</Label>
+                    <Label htmlFor="site_url">サイトURL</Label>
                     <Input id="site_url" name="site_url" defaultValue={project?.site_url || ""} className="rounded-xl bg-slate-50 border-0 h-10" placeholder="https://..." />
                   </div>
 
                   <div className="grid gap-2">
-                     <Label htmlFor="memo" className="text-slate-400">Admin Memo (Private)</Label>
-                     <Textarea id="memo" name="memo" defaultValue={project?.memo || ""} className="rounded-xl bg-slate-50 border-0 min-h-[60px]" placeholder="Secret notes..." />
+                     <Label htmlFor="memo" className="text-slate-600">開発メモ (公開されます)</Label>
+                     <Textarea id="memo" name="memo" defaultValue={project?.memo || ""} className="rounded-xl bg-slate-50 border-0 min-h-[60px]" placeholder="技術スタックや苦労した点など..." />
                   </div>
               </div>
           </div>
@@ -180,7 +202,7 @@ export function ProjectForm({ project }: { project?: Project }) {
           <DialogFooter>
             <Button type="submit" className="rounded-full w-full h-12 text-base" disabled={loading || uploading}>
                {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-               {isEdit ? "Save Changes" : "Create Project"}
+               {isEdit ? "変更を保存" : "プロジェクトを作成"}
             </Button>
           </DialogFooter>
         </form>

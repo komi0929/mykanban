@@ -7,6 +7,7 @@ create table public.projects (
   memo text, -- Admin only
   image_url text,
   site_url text,
+  sort_order integer default 0,
   created_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );

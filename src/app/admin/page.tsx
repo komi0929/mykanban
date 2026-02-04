@@ -3,7 +3,6 @@ import { Database } from '@/lib/database.types'
 import { redirect } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { ProjectForm } from '@/components/admin/project-form'
 import { logout } from './actions'
 import { Trash2, ExternalLink } from 'lucide-react'
@@ -24,6 +23,7 @@ export default async function AdminPage() {
   const { data: projectsData } = await supabase
     .from('projects')
     .select('*')
+    .order('sort_order', { ascending: true })
     .order('created_at', { ascending: false })
   
   const projects = projectsData as Database['public']['Tables']['projects']['Row'][] | null
@@ -34,11 +34,17 @@ export default async function AdminPage() {
         <header className="flex items-center justify-between">
           <h1 className="text-3xl font-bold tracking-tight text-slate-900">Admin Dashboard</h1>
           <div className="flex items-center gap-4">
+             <Button asChild variant="outline" className="rounded-full gap-2">
+                <a href="/" target="_blank" rel="noopener noreferrer">
+                   <ExternalLink className="h-4 w-4" />
+                   ホームを開く
+                </a>
+             </Button>
              <form action={async () => {
                 'use server'
                 await logout()
              }}>
-                <Button variant="ghost" className="text-slate-500 hover:text-slate-900">Log out</Button>
+                <Button variant="ghost" className="text-slate-500 hover:text-slate-900">ログアウト</Button>
              </form>
           </div>
         </header>

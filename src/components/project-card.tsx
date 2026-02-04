@@ -44,6 +44,14 @@ export function ProjectCard({ project }: { project: Project }) {
              <p className="mt-2 text-sm text-slate-500 line-clamp-2 leading-relaxed">
                {project.summary || "No description"}
              </p>
+             
+             {/* Dev Note (Memo) */}
+             {project.memo && (
+                <div className="mt-3 rounded-xl bg-slate-50 p-3">
+                   <p className="text-xs font-bold text-slate-400 mb-1">開発メモ</p>
+                   <p className="text-xs text-slate-600 leading-relaxed whitespace-pre-wrap">{project.memo}</p>
+                </div>
+             )}
           </div>
         </div>
       </DialogTrigger>

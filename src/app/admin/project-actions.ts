@@ -23,7 +23,8 @@ export async function createProject(formData: FormData) {
     status: (status as "ideation" | "development" | "live" | "done") || 'ideation',
     site_url: formData.get('site_url') as string | null,
     memo: formData.get('memo') as string | null,
-    image_url: formData.get('image_url') as string | null, 
+    image_url: formData.get('image_url') as string | null,
+    sort_order: Number(formData.get('sort_order') || 0),
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -51,6 +52,7 @@ export async function updateProject(formData: FormData) {
     site_url: formData.get('site_url') as string,
     memo: formData.get('memo') as string,
     image_url: formData.get('image_url') as string,
+    sort_order: Number(formData.get('sort_order') || 0),
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
