@@ -20,7 +20,6 @@ export default async function Home() {
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1600px]">
         <header className="py-12 sm:py-20 flex flex-col items-center justify-center text-center space-y-6">
-        <header className="py-12 sm:py-20 flex flex-col items-center justify-center text-center space-y-6">
           <Image 
               src="/logo_brand.png" 
               alt="mykanban" 
@@ -29,7 +28,6 @@ export default async function Home() {
               className="object-contain h-12 w-auto sm:h-20" 
               priority
           />
-        </header>
         </header>
         
         <KanbanBoard projects={projects || []} />
