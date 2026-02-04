@@ -18,9 +18,9 @@ export function SiteHeader() {
                 <Image 
                     src="/logo_brand.png" 
                     alt="mykanban" 
-                    width={180}
-                    height={45}
-                    className="object-contain h-10 w-auto" 
+                    width={160}
+                    height={40}
+                    className="object-contain h-8 w-auto" 
                     priority
                 />
             </Link>
