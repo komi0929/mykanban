@@ -25,9 +25,25 @@ export default async function Home() {
               alt="mykanban" 
               width={600}
               height={150}
-              className="object-contain h-16 w-auto sm:h-24" 
+              className="object-contain h-16 w-auto sm:h-24 mb-4" 
               priority
           />
+          <div className="text-slate-600 font-medium leading-relaxed max-w-xl mx-auto text-sm sm:text-base">
+            <p>
+              福岡の小さなお菓子屋さんが、「あったらいいな」を形にする個人開発サイト。<br className="hidden sm:inline" />
+              アイデアを共有して、みんなでワクワクできる場所を目指しています。<br className="hidden sm:inline" />
+              アイデア募集中！
+              <a 
+                href="https://humuhumu.hitokoto.tech/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sky-500 hover:text-sky-600 hover:underline mx-1 font-bold inline-flex items-center"
+              >
+                「ふむふむ君」
+              </a>
+              にもぜひ教えてくださいね。
+            </p>
+          </div>
         </header>
         
         <KanbanBoard projects={projects || []} />
