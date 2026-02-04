@@ -22,20 +22,17 @@ export function ProjectCard({ project }: { project: Project }) {
       <DialogTrigger asChild>
         <div className="group cursor-pointer rounded-3xl bg-white p-4 shadow-sm hover:shadow-soft transition-all duration-300 hover:-translate-y-1 w-full">
           {/* Card Visual / Image */}
-          <div className="relative aspect-4/3 w-full overflow-hidden rounded-[20px] bg-slate-100 shadow-inner">
-             {project.image_url ? (
-                <Image 
-                  src={project.image_url} 
-                  alt={project.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-             ) : (
-                <div className="flex h-full w-full items-center justify-center bg-slate-50 text-slate-300">
-                    <span className="text-4xl font-bold opacity-30 select-none">?</span>
-                </div>
-             )}
-          </div>
+          {/* Card Visual / Image */}
+          {project.image_url && (
+            <div className="relative aspect-4/3 w-full overflow-hidden rounded-[20px] bg-slate-100 shadow-inner">
+              <Image 
+                src={project.image_url} 
+                alt={project.title}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+          )}
           
           <div className="mt-4 px-1">
              <div className="flex items-center justify-between">
@@ -50,20 +47,16 @@ export function ProjectCard({ project }: { project: Project }) {
       
       <DialogContent className="sm:max-w-2xl bg-white p-6 sm:p-8">
         <DialogHeader>
-          <div className="mb-6 overflow-hidden rounded-2xl bg-slate-100 relative aspect-video w-full shadow-inner">
-               {project.image_url ? (
+          {project.image_url && (
+            <div className="mb-6 overflow-hidden rounded-2xl bg-slate-100 relative aspect-video w-full shadow-inner">
                 <Image 
                   src={project.image_url} 
                   alt={project.title}
                   fill
                   className="object-cover"
                 />
-             ) : (
-                <div className="flex h-full w-full items-center justify-center bg-slate-50 text-slate-300">
-                    <span className="text-6xl font-bold opacity-30 select-none">No Image</span>
-                </div>
-             )}
-          </div>
+            </div>
+          )}
           <div className="flex flex-col gap-2 text-left">
              <div className="flex items-center gap-3">
                 <DialogTitle className="text-3xl pt-2">{project.title}</DialogTitle>
