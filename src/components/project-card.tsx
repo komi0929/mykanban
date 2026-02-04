@@ -44,14 +44,6 @@ export function ProjectCard({ project }: { project: Project }) {
              <p className="mt-2 text-sm text-slate-500 line-clamp-2 leading-relaxed">
                {project.summary || "No description"}
              </p>
-             
-             {/* Dev Note (Memo) */}
-             {project.memo && (
-                <div className="mt-3 rounded-xl bg-slate-50 p-3">
-                   <p className="text-xs font-bold text-slate-400 mb-1">開発メモ</p>
-                   <p className="text-xs text-slate-600 leading-relaxed whitespace-pre-wrap">{project.memo}</p>
-                </div>
-             )}
           </div>
         </div>
       </DialogTrigger>
@@ -82,11 +74,19 @@ export function ProjectCard({ project }: { project: Project }) {
           </div>
         </DialogHeader>
         
-        <DialogDescription className="mt-4 text-base leading-7 text-slate-600">
-           {project.summary || "No description provided."}
-        </DialogDescription>
-        
-        <div className="mt-8 flex justify-end gap-3">
+         <DialogDescription className="mt-4 text-base leading-7 text-slate-600">
+            {project.summary || "No description provided."}
+         </DialogDescription>
+
+         {/* Dev Note (Memo) - Visible only in details */}
+         {project.memo && (
+            <div className="mt-6 rounded-2xl bg-slate-50 p-4 border border-slate-100">
+               <p className="text-sm font-bold text-slate-400 mb-2">開発メモ</p>
+               <p className="text-sm text-slate-600 leading-relaxed whitespace-pre-wrap">{project.memo}</p>
+            </div>
+         )}
+         
+         <div className="mt-8 flex justify-end gap-3">
              {project.site_url ? (
                  <Button asChild className="rounded-full bg-black text-white px-8 h-12 text-base hover:bg-slate-800 hover:shadow-lg transition-all" size="lg">
                     <a href={project.site_url} target="_blank" rel="noopener noreferrer">
