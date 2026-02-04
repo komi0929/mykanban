@@ -37,7 +37,7 @@ export function KanbanBoard({ projects }: KanbanBoardProps) {
                className={cn(
                  "flex-1 min-w-[80px] py-2 px-3 rounded-xl text-xs font-bold transition-all duration-200 whitespace-nowrap",
                  activeTab === col.id 
-                   ? "bg-white text-slate-800 shadow-sm" 
+                   ? cn("bg-white shadow-sm", col.color)
                    : "text-slate-500 hover:text-slate-700 hover:bg-slate-200/50"
                )}
              >
