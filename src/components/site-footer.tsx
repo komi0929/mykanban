@@ -9,11 +9,11 @@ export function SiteFooter() {
             自己紹介
           </Link>
           <Link href="#" className="hover:text-pink-500 transition-colors">
-            お守りにどうぞ
+            お守りに
           </Link>
         </div>
         <div className="text-xs text-slate-400">
-          © 2024 mykanban. All rights reserved.
+          © 2026 Hitokoto Inc. All rights reserved.
         </div>
       </div>
     </footer>

@@ -24,13 +24,8 @@ export function SiteHeader() {
                 自己紹介
             </Link>
             <Link href="#" className="text-sm font-bold text-slate-600 hover:text-pink-500 transition-colors">
-                お守りにどうぞ
+                お守りに
             </Link>
-            <Button asChild variant="ghost" className="rounded-full text-slate-400 hover:text-slate-900">
-                <Link href="/admin">
-                    Login
-                </Link>
-            </Button>
         </nav>
 
         {/* Mobile Hamburger Menu */}
@@ -56,17 +51,8 @@ export function SiteHeader() {
                 className="p-4 rounded-xl bg-slate-50 text-center font-bold text-slate-700 hover:bg-pink-50 hover:text-pink-600 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
             >
-                お守りにどうぞ
+                お守りに
             </Link>
-            <div className="border-t border-slate-100 pt-2">
-                <Link 
-                    href="/admin" 
-                    className="block p-4 text-center text-sm text-slate-400 hover:text-slate-900"
-                    onClick={() => setIsMenuOpen(false)}
-                >
-                    Admin Login
-                </Link>
-            </div>
         </div>
       )}
     </header>
