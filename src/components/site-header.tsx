@@ -14,12 +14,13 @@ export function SiteHeader() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1600px] h-16 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
-            <Link href="/" className="relative h-10 w-48 hover:opacity-80 transition-opacity">
+            <Link href="/" className="hover:opacity-80 transition-opacity">
                 <Image 
                     src="/logo_brand.png" 
                     alt="mykanban" 
-                    fill 
-                    className="object-contain object-left" 
+                    width={180}
+                    height={45}
+                    className="object-contain h-10 w-auto" 
                     priority
                 />
             </Link>

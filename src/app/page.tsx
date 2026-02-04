@@ -20,12 +20,13 @@ export default async function Home() {
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1600px]">
         <header className="py-12 sm:py-20 flex flex-col items-center justify-center text-center space-y-6">
-          <div className="relative h-24 w-80 sm:h-32 sm:w-96">
+          <div className="relative w-[280px] sm:w-[500px] h-auto">
              <Image 
                  src="/logo_brand.png" 
                  alt="mykanban" 
-                 fill 
-                 className="object-contain" 
+                 width={500}
+                 height={150}
+                 className="object-contain w-full h-auto" 
                  priority
              />
           </div>
