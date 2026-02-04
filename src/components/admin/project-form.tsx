@@ -24,6 +24,13 @@ export function ProjectForm({ project }: { project?: Project }) {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const { toast } = useToast()
   
+
+  
+  // Refine: If it's a new project/empty URL, default to 'custom' (empty) or 'dev'?
+  // Let's default to Custom so they see the input.
+  const [urlMode, setUrlMode] = useState<'custom' | 'dev' | 'internal'>(project?.site_url === '#internal' ? 'internal' : (project?.site_url ? 'custom' : 'custom'))
+  const [siteUrl, setSiteUrl] = useState(project?.site_url === '#internal' ? '' : (project?.site_url || ""))
+
   const isEdit = !!project
 
   async function handleImageUpload(file: File) {
@@ -75,6 +82,17 @@ export function ProjectForm({ project }: { project?: Project }) {
   async function handleSubmit(formData: FormData) {
     setLoading(true)
     formData.append('image_url', imageUrl)
+    
+    // Handle URL modes explicitly
+    if (urlMode === 'dev') {
+        formData.set('site_url', '')
+    } else if (urlMode === 'internal') {
+        formData.set('site_url', '#internal')
+    } else {
+        // Custom: Input value is already in formData, keep it.
+        // But if user cleared it, it's empty.
+    }
+
     if (isEdit) {
         formData.append('id', project.id)
         const res = await updateProject(formData)
@@ -189,7 +207,42 @@ export function ProjectForm({ project }: { project?: Project }) {
 
                   <div className="grid gap-2">
                     <Label htmlFor="site_url">サイトURL</Label>
-                    <Input id="site_url" name="site_url" defaultValue={project?.site_url || ""} className="rounded-xl bg-slate-50 border-0 h-10" placeholder="https://..." />
+                    <div className="flex gap-2 mb-1">
+                      <Button type="button" variant={urlMode === 'custom' ? 'default' : 'outline'} className="rounded-full h-8 text-xs" onClick={() => { setUrlMode('custom'); setSiteUrl('') }}>
+                         URL入力
+                      </Button>
+                      <Button type="button" variant={urlMode === 'dev' ? 'default' : 'outline'} className="rounded-full h-8 text-xs" onClick={() => { setUrlMode('dev'); setSiteUrl('') }}>
+                         なし（開発中）
+                      </Button>
+                      <Button type="button" variant={urlMode === 'internal' ? 'default' : 'outline'} className="rounded-full h-8 text-xs" onClick={() => { setUrlMode('internal'); setSiteUrl('') }}>
+                         なし（社内ツール）
+                      </Button>
+                    </div>
+                    {urlMode === 'custom' ? (
+                       <Input 
+                         id="site_url" 
+                         name="site_url" 
+                         value={siteUrl} 
+                         onChange={(e) => setSiteUrl(e.target.value)} 
+                         className="rounded-xl bg-slate-50 border-0 h-10" 
+                         placeholder="https://..." 
+                       />
+                    ) : (
+                       <div className="h-10 px-3 rounded-xl bg-slate-100 flex items-center text-slate-400 text-sm">
+                          {urlMode === 'dev' && "開発中として表示されます"}
+                          {urlMode === 'internal' && "社内ツールのためURLは表示されません"}
+                          <input type="hidden" name="site_url" value={urlMode === 'internal' ? '#internal' : ''} />
+                          {/* Note: 'dev' is empty string (default), 'internal' gets a marker if we want, or just empty. 
+                              User asked for specific statuses. Let's start with just empty for 'dev'. 
+                              BUT if I pass empty for 'dev', how do I distinguish from 'just empty'?
+                              The request implies they are specific statuses. 
+                              However, standardizing on empty = 'Not Live Yet' covers 'Dev'.
+                              'Internal' might need #internal.
+                              Let's use '#internal' for Internal.
+                              Let's use '' for Dev.
+                          */}
+                       </div>
+                    )}
                   </div>
 
                   <div className="grid gap-2">
