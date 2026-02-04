@@ -57,7 +57,7 @@ export default async function AdminPage() {
            <CardContent className="px-0 pb-0">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {projects?.map((project) => (
-                    <div key={project.id} className="group relative bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-300 rounded-[24px] p-4 shadow-sm hover:shadow-xl hover:-translate-y-1 border border-slate-100/50">
+                    <div key={project.id} className="group relative bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-300 rounded-3xl p-4 shadow-sm hover:shadow-xl hover:-translate-y-1 border border-slate-100/50">
                         {/* Image / Cover */}
                         <div className="relative aspect-video w-full overflow-hidden rounded-[16px] bg-slate-100 mb-4">
                           {project.image_url ? (
