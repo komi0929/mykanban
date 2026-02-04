@@ -16,18 +16,6 @@ export default function AboutPage() {
       
       <div className="container mx-auto px-4 py-32 sm:py-40">
         
-        {/* Top Icon - Centered */}
-        <div className="flex justify-center mb-10">
-            <div className="relative w-20 h-20 shadow-sm rounded-2xl overflow-hidden">
-                <Image 
-                    src="/brand-icon.png" 
-                    alt="icon" 
-                    fill 
-                    className="object-cover"
-                />
-            </div>
-        </div>
-
         {/* Content Card */}
         <div className="max-w-3xl mx-auto bg-white rounded-[40px] p-8 sm:p-16 shadow-sm">
             
