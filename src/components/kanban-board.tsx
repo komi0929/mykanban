@@ -19,7 +19,7 @@ const COLUMNS = [
 ] as const
 
 import { useState } from "react"
-import { cn } from "@/lib/utils"
+
 
 export function KanbanBoard({ projects }: KanbanBoardProps) {
   const [activeTab, setActiveTab] = useState<typeof COLUMNS[number]['id']>('ideation')
