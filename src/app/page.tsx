@@ -25,7 +25,7 @@ export default async function Home() {
               alt="mykanban" 
               width={600}
               height={150}
-              className="object-contain h-12 w-auto sm:h-20" 
+              className="object-contain h-20 w-auto sm:h-36" 
               priority
           />
         </header>
