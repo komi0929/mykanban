@@ -22,7 +22,7 @@ import { useState } from "react"
 
 
 export function KanbanBoard({ projects }: KanbanBoardProps) {
-  const [activeTab, setActiveTab] = useState<typeof COLUMNS[number]['id']>('ideation')
+  const [activeTab, setActiveTab] = useState<typeof COLUMNS[number]['id']>('live')
 
   return (
     <>
