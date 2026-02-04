@@ -15,7 +15,7 @@ export default async function Home() {
     <main className="min-h-screen w-full bg-background selection:bg-accent selection:text-accent-foreground pb-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1600px]">
         <header className="py-16 sm:py-24 flex flex-col items-center justify-center text-center space-y-6">
-          <h1 className="text-5xl font-bold text-slate-900 tracking-tight sm:text-7xl drop-shadow-sm font-[var(--font-fredoka)]">
+          <h1 className="text-5xl font-bold text-slate-900 tracking-tight sm:text-7xl drop-shadow-sm font-(--font-fredoka)">
             mykanban
           </h1>
 
