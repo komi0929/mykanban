@@ -33,9 +33,6 @@ export default function RequestsPage() {
                             <span className="text-xl">💡</span> アイデアはあるのでカタチにしたい！
                         </li>
                         <li className="flex items-center gap-2">
-                            <span className="text-xs text-slate-400 mx-1">もしくは</span>
-                        </li>
-                        <li className="flex items-center gap-2">
                             <span className="text-xl">🔨</span> カタチにする能力があるのでアイデアが欲しい！
                         </li>
                     </ul>
@@ -51,22 +48,25 @@ export default function RequestsPage() {
 
                 <div className="py-4">
                     <p className="mb-2">そこで、</p>
-                    <p className="text-lg font-bold text-slate-800">
-                        mykanban改め → <span className="text-sky-500">みんなのカンバンOurKanban</span>
-                    </p>
-                    <p className="text-sm text-slate-400 font-bold mt-1">略して、アワカン（仮）</p>
-                    <p className="mt-2 text-sm">というコミュニティを立ち上げます。</p>
+                    <div className="flex flex-col items-center justify-center gap-2">
+                        <p className="text-lg font-bold text-slate-800">
+                            mykanban改め → <span className="text-sky-500">みんなのカンバンOurKanban</span>
+                        </p>
+                        <p className="text-2xl sm:text-3xl font-extrabold text-slate-800 bg-yellow-100 px-4 py-1 rounded-full transform -rotate-2 inline-block">
+                            略して、アワカン（仮）
+                        </p>
+                        <p className="mt-2 text-base">というコミュニティを立ち上げます。</p>
+                    </div>
                 </div>
 
-                <p className="text-sm">
+                <p className="text-base">
                     コミュニティといっても、まず最初はこのmykanbanの最新情報を3日に一度、<br className="hidden sm:inline" />
                     お送りするくらいのスロースタートを予定していますので
                 </p>
 
                 <div className="bg-emerald-50/50 p-6 rounded-2xl border border-emerald-100">
-                    <p className="mb-4 font-bold text-emerald-800">
-                        見守ってもいいかな、という方はぜひ、<br />
-                        このお問い合わせ窓口にも利用している、公式LINEにご登録ください！
+                    <p className="mb-4 font-bold text-emerald-800 text-lg">
+                        見守ってもいいかな、という方はぜひ、このお問い合わせ窓口にも利用している、公式LINEにご登録ください！
                     </p>
                     <a 
                         href="https://lin.ee/D5y3TBU" 
