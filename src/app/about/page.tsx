@@ -1,5 +1,6 @@
 
 import Image from "next/image"
+import Link from "next/link"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { Wrench } from "lucide-react"
@@ -74,6 +75,17 @@ export default function AboutPage() {
                                     「ふむふむ君」
                                 </a>
                                 に教えてあげてください。
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3 className="text-slate-800 font-bold mb-2">コミュニティをはじめませんか？</h3>
+                            <p className="text-slate-600">
+                                僕のつくったアプリだけではなく、みなさんの作品や、アイデアが集まる場所になったらいいなと。詳しくは
+                                <Link href="/requests" className="text-pink-500 hover:text-pink-600 hover:underline mx-1 font-bold">
+                                    こちら
+                                </Link>
+                                。
                             </p>
                         </div>
                     </div>
