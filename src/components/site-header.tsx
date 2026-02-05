@@ -28,11 +28,14 @@ export function SiteHeader() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
-            <Link href="/about" className="text-sm font-bold text-slate-600 hover:text-sky-500 transition-colors">
-                自己紹介
+            <Link href="/about-site" className="text-sm font-bold text-slate-600 hover:text-sky-500 transition-colors">
+                サイトについて
             </Link>
-            <Link href="/omamori" className="text-sm font-bold text-slate-600 hover:text-pink-500 transition-colors">
-                お守りに
+            <Link href="/requests" className="text-sm font-bold text-slate-600 hover:text-pink-500 transition-colors">
+                皆さんにお願い！
+            </Link>
+            <Link href="/contact" className="text-sm font-bold text-slate-600 hover:text-emerald-500 transition-colors">
+                お問い合わせ
             </Link>
         </nav>
 
@@ -48,18 +51,25 @@ export function SiteHeader() {
       {isMenuOpen && (
         <div className="md:hidden absolute top-16 left-0 right-0 bg-white border-b border-slate-100 shadow-xl p-4 flex flex-col gap-4 animate-in slide-in-from-top-2 duration-200">
             <Link 
-                href="/about" 
+                href="/about-site" 
                 className="p-4 rounded-xl bg-slate-50 text-center font-bold text-slate-700 hover:bg-sky-50 hover:text-sky-600 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
             >
-                自己紹介
+                サイトについて
             </Link>
             <Link 
-                href="/omamori" 
+                href="/requests" 
                 className="p-4 rounded-xl bg-slate-50 text-center font-bold text-slate-700 hover:bg-pink-50 hover:text-pink-600 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
             >
-                お守りに
+                皆さんにお願い！
+            </Link>
+            <Link 
+                href="/contact" 
+                className="p-4 rounded-xl bg-slate-50 text-center font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+            >
+                お問い合わせ
             </Link>
         </div>
       )}
