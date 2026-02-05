@@ -1,11 +1,13 @@
 
+import Link from "next/link"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { Construction } from "lucide-react"
+import { UpdateLog } from "@/components/update-log"
 
 export const metadata = {
   title: 'サイトについて - MyKanban',
-  description: 'このサイトについて',
+  description: 'このサイトの目的と更新情報',
 }
 
 export default function AboutSitePage() {
@@ -14,12 +16,61 @@ export default function AboutSitePage() {
       <SiteHeader />
       
       <div className="container mx-auto px-4 py-32 sm:py-40">
-        <div className="max-w-3xl mx-auto bg-white rounded-[40px] p-8 sm:p-16 shadow-sm text-center">
-            <div className="bg-slate-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Construction className="text-slate-400 w-10 h-10" />
+        <div className="max-w-3xl mx-auto space-y-16">
+            
+            {/* Main Content Card */}
+            <div className="bg-white rounded-[40px] p-8 sm:p-16 shadow-sm">
+                <div className="bg-slate-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8">
+                    <Construction className="text-slate-400 w-10 h-10" />
+                </div>
+                
+                <h1 className="text-2xl font-bold text-slate-800 mb-10 text-center">サイトについて</h1>
+                
+                <div className="space-y-10 text-slate-600 font-medium leading-relaxed">
+                    
+                    {/* Block 1 */}
+                    <section>
+                        <p className="mb-6">
+                            mykanbanは、運営者のkomiが開発したWebアプリを紹介しているサイトです。
+                        </p>
+                        <p>
+                            「カンバン」形式で、
+                            <Link href="/about" className="text-sky-500 hover:underline hover:text-sky-600 font-bold mx-1">
+                                僕（komi）自身
+                            </Link>
+                            が進んでいるプロジェクトを管理したかったのと、「看板」となるアプリをつくりたい！という切実な思いからmykanbanと名付けました。
+                        </p>
+                    </section>
+                    
+                    <hr className="border-slate-100" />
+
+                    {/* Block 2 */}
+                    <section>
+                        <p className="mb-6">
+                            現在は、基本、僕がつくったアプリが中心ですが、数週間以内に、
+                        </p>
+                        <ul className="list-disc pl-6 mb-6 space-y-2 text-slate-700 font-bold">
+                            <li>Webアプリの開発の種となるアイデア</li>
+                            <li>再利用可能なGithubのデータ</li>
+                        </ul>
+                        <p className="mb-6">
+                            が共有される仕組みをつくります！
+                        </p>
+                        <p>
+                            進捗を、3日に一回程度、お知らせしていきますので、ぜひ、お問い合わせ窓口にしている、
+                            <Link href="/contact" className="text-emerald-500 hover:underline hover:text-emerald-600 font-bold mx-1">
+                                こちらの公式LINE
+                            </Link>
+                            にご登録いただけたら、嬉しいです！
+                        </p>
+                    </section>
+
+                </div>
             </div>
-            <h1 className="text-2xl font-bold text-slate-800 mb-4">サイトについて</h1>
-            <p className="text-slate-500">現在準備中です。公開までしばらくお待ちください。</p>
+
+            {/* Updates Section */}
+            <UpdateLog />
+
         </div>
       </div>
 
