@@ -3,6 +3,7 @@ import { KanbanBoard } from '@/components/kanban-board'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import Image from "next/image"
+import Link from "next/link"
 
 export const revalidate = 0
 
@@ -30,9 +31,12 @@ export default async function Home() {
           />
           <div className="text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto text-sm sm:text-base">
             <p className="inline-block text-left sm:text-center">
-              福岡の小さなスイーツ店の店主、komiが早起きしてつくったアプリ達です。<br />
-              皆さんの毎日がちょっとだけ楽しく・便利になると嬉しいです。<br />
-              こんなの欲しい！というアイデアは
+              福岡の小さなスイーツ店の店主、
+              <Link href="/about" className="text-orange-500 hover:text-orange-600 hover:underline mx-1 font-bold">
+                komi
+              </Link>
+              が早起きしてつくったアプリ達をご紹介。<br />
+              こんなのあったらいいな！というアイデアは
               <a 
                 href="https://humuhumu.hitokoto.tech/" 
                 target="_blank" 
@@ -41,7 +45,8 @@ export default async function Home() {
               >
                 「ふむふむ君」
               </a>
-              に聞かせてください！
+              に聞かせてください！<br />
+              皆さんの毎日がちょっとだけ楽しく・便利になると嬉しいです。
             </p>
           </div>
         </header>
