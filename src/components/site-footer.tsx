@@ -8,6 +8,9 @@ export function SiteFooter() {
           <Link href="/about-site" className="hover:text-sky-500 transition-colors">
             サイトについて
           </Link>
+          <Link href="/about" className="hover:text-orange-500 transition-colors">
+            自己紹介
+          </Link>
           <Link href="/requests" className="hover:text-pink-500 transition-colors">
             皆さんにお願い！
           </Link>

@@ -31,6 +31,9 @@ export function SiteHeader() {
             <Link href="/about-site" className="text-sm font-bold text-slate-600 hover:text-sky-500 transition-colors">
                 サイトについて
             </Link>
+            <Link href="/about" className="text-sm font-bold text-slate-600 hover:text-orange-500 transition-colors">
+                自己紹介
+            </Link>
             <Link href="/requests" className="text-sm font-bold text-slate-600 hover:text-pink-500 transition-colors">
                 皆さんにお願い！
             </Link>
@@ -56,6 +59,13 @@ export function SiteHeader() {
                 onClick={() => setIsMenuOpen(false)}
             >
                 サイトについて
+            </Link>
+            <Link 
+                href="/about" 
+                className="p-4 rounded-xl bg-slate-50 text-center font-bold text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+            >
+                自己紹介
             </Link>
             <Link 
                 href="/requests" 
