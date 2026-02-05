@@ -2,7 +2,6 @@
 import Link from "next/link"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { Construction } from "lucide-react"
 import { UpdateLog } from "@/components/update-log"
 
 export const metadata = {
@@ -20,9 +19,6 @@ export default function AboutSitePage() {
             
             {/* Main Content Card */}
             <div className="bg-white rounded-[40px] p-8 sm:p-16 shadow-sm">
-                <div className="bg-slate-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8">
-                    <Construction className="text-slate-400 w-10 h-10" />
-                </div>
                 
                 <h1 className="text-2xl font-bold text-slate-800 mb-10 text-center">サイトについて</h1>
                 
