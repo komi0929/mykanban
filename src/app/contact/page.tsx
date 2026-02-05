@@ -1,7 +1,7 @@
 
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { SiteFooter } from "@/components/site-footer"
+
 
 export const metadata = {
   title: 'お問い合わせ - MyKanban',
