@@ -53,7 +53,7 @@ export function AdviceModal({ projectId, projectTitle }: AdviceModalProps) {
       <DialogTrigger asChild>
         <Button variant="outline" className="rounded-full gap-2 text-slate-600 hover:text-slate-900 border-slate-200">
           <Lightbulb className="h-4 w-4 text-amber-500" />
-          <span>アドバイス</span>
+          <span>アドバイスをおくる</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
