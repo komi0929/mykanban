@@ -2,7 +2,7 @@
 
 import { useState, useOptimistic, useTransition, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Heart } from "lucide-react"
+import { PartyPopper } from "lucide-react"
 import { sendYell } from "@/app/actions/feedback"
 import { cn } from "@/lib/utils"
 
@@ -55,13 +55,13 @@ export function YellButton({ projectId, initialCount }: YellButtonProps) {
       className={cn(
         "rounded-full gap-2 transition-all duration-300",
         hasYelled 
-          ? "bg-pink-50 text-pink-500 border-pink-200" 
-          : "hover:bg-pink-50 hover:text-pink-500 hover:border-pink-200 text-slate-500"
+          ? "bg-orange-50 text-orange-500 border-orange-200" 
+          : "hover:bg-orange-50 hover:text-orange-500 hover:border-orange-200 text-slate-500"
       )}
       onClick={handleYell}
       disabled={isPending || hasYelled}
     >
-      <Heart className={cn("h-4 w-4", hasYelled && "fill-current")} />
+      <PartyPopper className={cn("h-4 w-4", hasYelled && "fill-current")} />
       <span className="font-bold">{optimisticCount}</span>
       <span className="sr-only">Yells</span>
     </Button>

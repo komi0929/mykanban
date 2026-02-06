@@ -115,8 +115,8 @@ export default async function AdminPage() {
                         </TableCell>
                         <TableCell className="text-center">
                            <div className="flex items-center justify-center gap-3">
-                              <div className="flex items-center gap-1 text-xs font-bold text-pink-500 bg-pink-50 px-2 py-1 rounded-full" title="Yells">
-                                 <span>♥</span> {project.yell_count}
+                              <div className="flex items-center gap-1 text-xs font-bold text-orange-500 bg-orange-50 px-2 py-1 rounded-full" title="Yells">
+                                 <span>🎉</span> {project.yell_count}
                               </div>
                               <FeedbackSheet 
                                 projectId={project.id} 

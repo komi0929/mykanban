@@ -39,8 +39,8 @@ export function ProjectCard({ project }: { project: Project }) {
              <div className="flex items-center justify-between">
                 <h3 className="text-lg font-bold text-slate-800 line-clamp-1">{project.title}</h3>
                 {project.yell_count !== undefined && project.yell_count > 0 && (
-                  <div className="flex items-center gap-1 text-xs font-bold text-pink-500 bg-pink-50 px-2 py-1 rounded-full">
-                    <span>♥</span> {project.yell_count}
+                  <div className="flex items-center gap-1 text-xs font-bold text-orange-500 bg-orange-50 px-2 py-1 rounded-full">
+                    <span>🎉</span> {project.yell_count}
                   </div>
                 )}
              </div>

@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { MessageSquarePlus, Send } from "lucide-react"
+import { Lightbulb, Send } from "lucide-react"
 import { sendAdvice } from "@/app/actions/feedback"
 import { useToast } from "@/components/ui/use-toast"
 
@@ -52,7 +52,7 @@ export function AdviceModal({ projectId, projectTitle }: AdviceModalProps) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" className="rounded-full gap-2 text-slate-600 hover:text-slate-900 border-slate-200">
-          <MessageSquarePlus className="h-4 w-4" />
+          <Lightbulb className="h-4 w-4 text-amber-500" />
           <span>アドバイス</span>
         </Button>
       </DialogTrigger>
