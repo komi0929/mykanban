@@ -24,6 +24,20 @@ export default function RequestsPage() {
                     このようなサイトまでつくってしまいました。
                 </p>
 
+                <div className="bg-emerald-50/50 p-6 rounded-2xl border border-emerald-100 my-8">
+                    <p className="mb-4 font-bold text-emerald-800 text-lg">
+                        見守ってもいいかな、という方はぜひ、このお問い合わせ窓口にも利用している、公式LINEにご登録ください！
+                    </p>
+                    <a 
+                        href="https://lin.ee/D5y3TBU" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 bg-[#06C755] hover:bg-[#05b64d] text-white font-bold py-3 px-8 rounded-full transition-all hover:scale-105 shadow-md"
+                    >
+                        公式LINEに登録する
+                    </a>
+                </div>
+
                 <div className="bg-slate-50 p-6 rounded-2xl">
                     <p className="mb-4">
                         ひとりでもくもくとPCに向かうのは楽しいのですが、きっと同じような人
@@ -46,35 +60,34 @@ export default function RequestsPage() {
                     ちょっとだけでも便利に・楽しくできるのではないか？と考えています。
                 </p>
 
-                <div className="py-4">
-                    <p className="mb-2">そこで、</p>
-                    <div className="flex flex-col items-center justify-center gap-2">
-                        <p className="text-lg font-bold text-slate-800">
-                            mykanban改め → <span className="text-sky-500">みんなのカンバンOurKanban</span>
-                        </p>
-                        <p className="text-2xl sm:text-3xl font-extrabold text-slate-800 bg-yellow-100 px-4 py-1 rounded-full transform -rotate-2 inline-block">
-                            略して、アワカン（仮）
-                        </p>
-                        <p className="mt-2 text-base">というコミュニティを立ち上げます。</p>
-                    </div>
-                </div>
-
-                <p className="text-base">
-                    コミュニティといっても、まず最初はこのmykanbanの最新情報を3日に一度、<br className="hidden sm:inline" />
-                    お送りするくらいのスロースタートを予定していますので
-                </p>
-
-                <div className="bg-emerald-50/50 p-6 rounded-2xl border border-emerald-100">
-                    <p className="mb-4 font-bold text-emerald-800 text-lg">
-                        見守ってもいいかな、という方はぜひ、このお問い合わせ窓口にも利用している、公式LINEにご登録ください！
+                <div className="py-8">
+                    <p className="mb-4 leading-relaxed">
+                        そのような人のために向けて、コミュニティができたらよいな、と思っています。<br />
+                        noteのメンバーシップ、その名も
                     </p>
+                    
+                    <div className="flex flex-col items-center justify-center gap-6 mb-6 mt-2">
+                         <p className="text-2xl sm:text-3xl font-extrabold text-slate-800 bg-yellow-100 px-6 py-2 rounded-full transform -rotate-2 inline-block shadow-sm">
+                            オープンキッチン（仮）
+                        </p>
+                    </div>
+
+                    <p className="mb-6 leading-relaxed">
+                        を立ち上げましたので、ぜひご参加ください！<br />
+                        <span className="text-sm text-slate-500 font-bold">（開発者じゃないけど、見守ってあげてもいいかも！という人のご参加ももちろん大歓迎です。）</span>
+                    </p>
+
+                    <p className="mb-8 leading-relaxed">
+                        コミュニティといっても、まずは記事を３日一回くらいお送りするくらいのスロースタートを予定しています！
+                    </p>
+
                     <a 
-                        href="https://lin.ee/D5y3TBU" 
+                        href="https://note.com/sogu1/membership" 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 bg-[#06C755] hover:bg-[#05b64d] text-white font-bold py-3 px-8 rounded-full transition-all hover:scale-105 shadow-md"
+                        className="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 px-10 rounded-full transition-all hover:scale-105 shadow-md"
                     >
-                        公式LINEに登録する
+                        詳しくはこちら
                     </a>
                 </div>
             </div>
