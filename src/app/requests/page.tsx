@@ -82,7 +82,7 @@ export default function RequestsPage() {
                     </p>
 
                     <a 
-                        href="https://note.com/sogu1/membership" 
+                        href="https://note.com/sogu1/membership/info" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 px-10 rounded-full transition-all hover:scale-105 shadow-md"
