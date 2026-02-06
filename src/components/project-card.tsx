@@ -5,8 +5,10 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { ExternalLink } from "lucide-react"
+import { YellButton } from "@/components/feedback/yell-button"
+import { AdviceModal } from "@/components/feedback/advice-modal"
 
-type Project = Database['public']['Tables']['projects']['Row']
+type Project = Database['public']['Tables']['projects']['Row'] & { yell_count?: number }
 
 export function ProjectCard({ project }: { project: Project }) {
   // Map status to label
@@ -20,8 +22,7 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="group cursor-pointer rounded-3xl bg-white p-4 shadow-sm hover:shadow-soft transition-all duration-300 hover:-translate-y-1 w-full">
-          {/* Card Visual / Image */}
+        <div className="group cursor-pointer rounded-3xl bg-white p-4 shadow-sm hover:shadow-soft transition-all duration-300 hover:-translate-y-1 w-full relative">
           {/* Card Visual / Image */}
           {project.image_url && (
             <div className="relative aspect-4/3 w-full overflow-hidden rounded-[20px] bg-slate-100 shadow-inner">
@@ -37,6 +38,11 @@ export function ProjectCard({ project }: { project: Project }) {
           <div className="mt-4 px-1">
              <div className="flex items-center justify-between">
                 <h3 className="text-lg font-bold text-slate-800 line-clamp-1">{project.title}</h3>
+                {project.yell_count !== undefined && project.yell_count > 0 && (
+                  <div className="flex items-center gap-1 text-xs font-bold text-pink-500 bg-pink-50 px-2 py-1 rounded-full">
+                    <span>♥</span> {project.yell_count}
+                  </div>
+                )}
              </div>
              <p className="mt-2 text-sm text-slate-500 line-clamp-2 leading-relaxed">
                {project.summary || "No description"}
@@ -58,10 +64,16 @@ export function ProjectCard({ project }: { project: Project }) {
             </div>
           )}
           <div className="flex flex-col gap-2 text-left">
-             <div className="flex items-center gap-3">
-                <DialogTitle className="text-3xl pt-2">{project.title}</DialogTitle>
-                <div className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600 mt-2">
-                    {statusLabels[project.status]}
+             <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                    <DialogTitle className="text-3xl pt-2">{project.title}</DialogTitle>
+                    <div className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600 mt-2">
+                        {statusLabels[project.status]}
+                    </div>
+                </div>
+                {/* Yell Button in proper place */}
+                <div className="mt-2">
+                  <YellButton projectId={project.id} initialCount={project.yell_count || 0} />
                 </div>
              </div>
           </div>
@@ -79,9 +91,13 @@ export function ProjectCard({ project }: { project: Project }) {
             </div>
          )}
          
-         <div className="mt-8 flex justify-end gap-3">
+         <div className="mt-8 flex justify-between items-center border-t border-slate-100 pt-6">
+             {/* Advice Button */}
+             <AdviceModal projectId={project.id} projectTitle={project.title} />
+
+             {/* Site Link */}
              {project.site_url ? (
-                 <Button asChild className="rounded-full bg-black text-white px-8 h-12 text-base hover:bg-slate-800 hover:shadow-lg transition-all" size="lg">
+                 <Button asChild className="rounded-full bg-black text-white px-8 h-12 text-base hover:bg-slate-800 hover:shadow-lg transition-all shadow-md" size="lg">
                     <a href={project.site_url} target="_blank" rel="noopener noreferrer">
                        <ExternalLink className="mr-2 h-4 w-4" />
                        サイトを見る

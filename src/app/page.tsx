@@ -15,6 +15,18 @@ export default async function Home() {
     .order('sort_order', { ascending: true })
     .order('created_at', { ascending: false })
 
+  // Fetch yell counts for each project (Parallelized)
+  // Note: Only feasible for small number of projects. For scale, use RPC or a View.
+  const projectsWithCounts = await Promise.all(
+    (projects || []).map(async (p) => {
+      const { count } = await supabase
+        .from('yells')
+        .select('*', { count: 'exact', head: true })
+        .eq('project_id', p.id)
+      return { ...p, yell_count: count || 0 }
+    })
+  )
+
   return (
     <main className="min-h-screen w-full bg-background selection:bg-accent selection:text-accent-foreground pb-24 pt-20">
       <SiteHeader />
@@ -51,7 +63,7 @@ export default async function Home() {
           </div>
         </header>
         
-        <KanbanBoard projects={projects || []} />
+        <KanbanBoard projects={projectsWithCounts || []} />
       </div>
 
       <SiteFooter />

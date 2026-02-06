@@ -5,7 +5,7 @@ import { ProjectCard } from "@/components/project-card"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 
-type Project = Database['public']['Tables']['projects']['Row']
+type Project = Database['public']['Tables']['projects']['Row'] & { yell_count?: number }
 
 type KanbanBoardProps = {
   projects: Project[]

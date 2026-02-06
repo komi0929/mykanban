@@ -9,6 +9,7 @@ import { Trash2, ExternalLink } from 'lucide-react'
 import Image from 'next/image'
 import { deleteProject } from './project-actions'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { FeedbackSheet } from '@/components/admin/feedback-sheet'
 
 export const revalidate = 0
 
@@ -27,7 +28,30 @@ export default async function AdminPage() {
     .order('sort_order', { ascending: true })
     .order('created_at', { ascending: false })
   
-  const projects = projectsData as Database['public']['Tables']['projects']['Row'][] | null
+  const projectsRaw = projectsData as Database['public']['Tables']['projects']['Row'][] | null
+
+  // Fetch stats (Parallelized)
+  const projects = await Promise.all(
+    (projectsRaw || []).map(async (p) => {
+      // Get Yell Count
+      const { count: yellCount } = await supabase
+        .from('yells')
+        .select('*', { count: 'exact', head: true })
+        .eq('project_id', p.id)
+
+      // Get Advice Count
+      const { count: adviceCount } = await supabase
+        .from('advice')
+        .select('*', { count: 'exact', head: true })
+        .eq('project_id', p.id)
+
+      return { 
+        ...p, 
+        yell_count: yellCount || 0,
+        advice_count: adviceCount || 0
+      }
+    })
+  )
 
   return (
     <div className="min-h-screen bg-slate-50 p-4 sm:p-8">
@@ -63,6 +87,7 @@ export default async function AdminPage() {
                       <TableHead className="w-[80px]">Image</TableHead>
                       <TableHead className="w-[50px] text-center">Ord</TableHead>
                       <TableHead>Title</TableHead>
+                      <TableHead className="w-[100px] text-center">Feedback</TableHead>
                       <TableHead className="w-[120px]">Status</TableHead>
                       <TableHead className="w-[120px]">URL</TableHead>
                       <TableHead className="w-[100px] text-right">Actions</TableHead>
@@ -85,6 +110,18 @@ export default async function AdminPage() {
                         </TableCell>
                         <TableCell className="font-bold text-slate-700">
                            {project.title}
+                        </TableCell>
+                        <TableCell className="text-center">
+                           <div className="flex items-center justify-center gap-3">
+                              <div className="flex items-center gap-1 text-xs font-bold text-pink-500 bg-pink-50 px-2 py-1 rounded-full" title="Yells">
+                                 <span>♥</span> {project.yell_count}
+                              </div>
+                              <FeedbackSheet 
+                                projectId={project.id} 
+                                projectTitle={project.title}
+                                adviceCount={project.advice_count}
+                              />
+                           </div>
                         </TableCell>
                         <TableCell>
                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold whitespace-nowrap
@@ -123,7 +160,7 @@ export default async function AdminPage() {
                     ))}
                     {(!projects || projects.length === 0) && (
                        <TableRow>
-                          <TableCell colSpan={6} className="h-48 text-center text-slate-400">
+                          <TableCell colSpan={7} className="h-48 text-center text-slate-400">
                              No projects found. Create one to get started.
                           </TableCell>
                        </TableRow>
