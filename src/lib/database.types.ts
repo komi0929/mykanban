@@ -47,6 +47,52 @@ export interface Database {
           updated_at?: string
         }
       }
+      yells: {
+        Row: {
+          id: string
+          project_id: string
+          session_id: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          project_id: string
+          session_id: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          project_id?: string
+          session_id?: string
+          created_at?: string
+        }
+      }
+      advice: {
+        Row: {
+          id: string
+          project_id: string
+          sender_name: string | null
+          message: string
+          is_read: boolean
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          project_id: string
+          sender_name?: string | null
+          message: string
+          is_read?: boolean
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          project_id?: string
+          sender_name?: string | null
+          message?: string
+          is_read?: boolean
+          created_at?: string
+        }
+      }
     }
   }
 }
