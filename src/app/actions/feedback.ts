@@ -64,6 +64,20 @@ export async function sendAdvice(projectId: string, formData: FormData) {
     return { success: false, error: 'Message is required' }
   }
 
+  // 1. Length Check
+  if (message.length > 1000) {
+    return { success: false, error: 'メッセージは1000文字以内で入力してください' }
+  }
+
+  // 2. Simple Rate Limiting (Cookie Based)
+  const cookieStore = await cookies()
+  const lastSent = cookieStore.get('advice_last_sent')?.value
+  const now = Date.now()
+  
+  if (lastSent && now - parseInt(lastSent) < 60000) { // 1 minute cooldown
+    return { success: false, error: '少し時間を空けてから送信してください' }
+  }
+
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { error } = await (supabase as any)
@@ -78,6 +92,13 @@ export async function sendAdvice(projectId: string, formData: FormData) {
       console.error('Error sending advice:', error)
       return { success: false, error: error.message }
     }
+
+    // Set rate limit cookie
+    cookieStore.set('advice_last_sent', now.toString(), { 
+        path: '/', 
+        httpOnly: true, 
+        maxAge: 60 * 60 // 1 hour expiration for the cookie itself
+    })
 
     return { success: true }
   } catch (e) {

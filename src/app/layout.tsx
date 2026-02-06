@@ -19,6 +19,28 @@ const fredoka = Fredoka({
 export const metadata: Metadata = {
   title: 'MyKanban - マイカンバン',
   description: 'プロジェクトを一元管理・閲覧できるポートフォリオサイト',
+  openGraph: {
+    title: 'MyKanban - マイカンバン',
+    description: 'komiのポートフォリオサイト兼アイデア管理アプリ',
+    url: 'https://mykanban.hitokoto.tech',
+    siteName: 'MyKanban',
+    locale: 'ja_JP',
+    type: 'website',
+    images: [
+      {
+        url: '/logo_brand.png',
+        width: 1200,
+        height: 630,
+        alt: 'MyKanban Logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'MyKanban - マイカンバン',
+    description: 'komiのポートフォリオサイト兼アイデア管理アプリ',
+    images: ['/logo_brand.png'],
+  },
 }
 
 export default function RootLayout({
