@@ -18,7 +18,7 @@ export default async function Home() {
   // Fetch yell counts for each project (Parallelized)
   // Note: Only feasible for small number of projects. For scale, use RPC or a View.
   const projectsWithCounts = await Promise.all(
-    (projects || []).map(async (p) => {
+    ((projects as any[]) || []).map(async (p) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const { count } = await (supabase as any)
         .from('yells')
