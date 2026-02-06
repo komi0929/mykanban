@@ -19,7 +19,8 @@ export default async function Home() {
   // Note: Only feasible for small number of projects. For scale, use RPC or a View.
   const projectsWithCounts = await Promise.all(
     (projects || []).map(async (p) => {
-      const { count } = await supabase
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { count } = await (supabase as any)
         .from('yells')
         .select('*', { count: 'exact', head: true })
         .eq('project_id', p.id)

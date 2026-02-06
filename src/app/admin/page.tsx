@@ -34,13 +34,15 @@ export default async function AdminPage() {
   const projects = await Promise.all(
     (projectsRaw || []).map(async (p) => {
       // Get Yell Count
-      const { count: yellCount } = await supabase
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { count: yellCount } = await (supabase as any)
         .from('yells')
         .select('*', { count: 'exact', head: true })
         .eq('project_id', p.id)
 
       // Get Advice Count
-      const { count: adviceCount } = await supabase
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { count: adviceCount } = await (supabase as any)
         .from('advice')
         .select('*', { count: 'exact', head: true })
         .eq('project_id', p.id)

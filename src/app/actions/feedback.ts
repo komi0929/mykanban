@@ -30,7 +30,8 @@ export async function sendYell(projectId: string) {
   // so technically they can spam if they clear cookies. This matches "Like instead".
   
   try {
-    const { error } = await supabase
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { error } = await (supabase as any)
       .from('yells')
       .insert({
         project_id: projectId,
@@ -64,7 +65,8 @@ export async function sendAdvice(projectId: string, formData: FormData) {
   }
 
   try {
-    const { error } = await supabase
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { error } = await (supabase as any)
       .from('advice')
       .insert({
         project_id: projectId,
@@ -90,7 +92,8 @@ export async function sendAdvice(projectId: string, formData: FormData) {
 export async function getFeedbackStats(projectId: string) {
   const supabase = await createClient()
   
-  const { count, error } = await supabase
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { count, error } = await (supabase as any)
     .from('yells')
     .select('*', { count: 'exact', head: true })
     .eq('project_id', projectId)
@@ -116,7 +119,8 @@ export async function getAdvice(projectId: string) {
   }
 
   try {
-    const { data, error } = await supabase
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { data, error } = await (supabase as any)
       .from('advice')
       .select('*')
       .eq('project_id', projectId)
@@ -128,7 +132,7 @@ export async function getAdvice(projectId: string) {
     }
     
     return { success: true, data }
-  } catch (e) {
+  } catch (_) {
     return { success: false, error: 'Internal Server Error' }
   }
 }
